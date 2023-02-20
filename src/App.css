@@ -1,38 +1,110 @@
 .App {
+  background-color: #000;
   text-align: center;
+  width: 100%;
+  height: 100vh;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.timer{
+  padding-top: 8rem;
   color: white;
+  font-size: 28px;
+  font-weight: 500;
 }
 
-.App-link {
-  color: #61dafb;
+.timer__value{
+  color: white;
+  font-size: 20px;
+  height: 50%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.start{
+  width: 80px;
+  height: 30px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  border:none;
+  border-radius: 15px;
+  background-color: rgb(58, 58, 158);
+  margin-right: 40px;
+}
+
+.stop{
+  width: 80px;
+  height: 30px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  border:none;
+  border-radius: 15px;
+  background-color: red;
+  margin-right: 40px;
+}
+
+.continue{
+  width: 80px;
+  height: 30px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  border:none;
+  border-radius: 15px;
+  background-color: rgb(58, 58, 158);
+  margin-right: 40px;
+}
+
+.interval{
+  width: 80px;
+  height: 30px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  border:none;
+  border-radius: 15px;
+  background-color: #4e4e4e;
+}
+
+.reset{
+  width: 80px;
+  height: 30px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  border:none;
+  border-radius: 15px;
+  background-color: #4e4e4e;
+}
+
+.timer__velue-box{
+  display: flex;
+  flex-direction: row;
+  grid-gap: 40px;
+  justify-content: center;
+  color: #4e4e4e;
+  font-size: 12px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #888;
+  width: 250px;
+  align-items: center;
+  margin: 0 auto;
+}
+
+
+.timer__info{
+  display: flex;
+  flex-direction: row;
+  grid-gap: 48px;
+  font-size: 12px;
+  justify-content: center;
+  color: #4e4e4e;
+}
+
+.lapTime{
+  color: #4e4e4e;
+  font-size: 14px;
+  font-weight: 500;
 }

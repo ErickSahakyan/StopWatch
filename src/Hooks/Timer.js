@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import moment from "moment";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function useTimer() {
   const [timerCount, setTimerCount] = useState(0);
@@ -10,13 +11,13 @@ export default function useTimer() {
   const [boolVal, setBoolVal] = useState(true);
 
   const [timerValue, setTimerValue] = useState([]);
+  const [lapTimeValue, setLapTimeValue] = useState([timer()]);
   const [timerCountVal, setTimerCountVal] = useState(1);
 
   const [lapTimeBool, setLapTimeBool] = useState(false);
   const [val, setVal] = useState(false);
 
   const saveTimerCountRef = useRef(null);
-  const saveLapTimeRef = useRef(null);
 
   function timer() {
     let milliseconds = Math.floor((timerCount % 1000) / 10);
@@ -45,14 +46,14 @@ export default function useTimer() {
 
   const handleStop = () => {
     clearTimeout(saveTimerCountRef.current);
-    clearTimeout(saveLapTimeRef.current);
 
     setBoolean(false);
     setBoolVal(false);
   };
 
   const handleReset = () => {
-    setTimerCount(0)
+    setLapTimeValue([]);
+    setTimerCount(0);
     setLapTimeBool(false);
     setBooleanValue(true);
     setBoolVal(true);
@@ -62,15 +63,36 @@ export default function useTimer() {
     setTimerCountVal(1);
   };
 
+  const getLapTime = (timerCount, lapTimeValue) => {
+    if (lapTimeValue.length === 1) {
+      return moment(timerCount).format("mm:ss.SS");
+    }
+    let lastElement = String(lapTimeValue[lapTimeValue.length - 1]);
+    let prevElement = String(lapTimeValue[lapTimeValue.length - 2]);
+    console.log(lastElement, prevElement);
+    const [min1, sec1, ms1] = lastElement.split(":").concat("0");
 
-  const handleInterval = () => {
+    const lastEl = (min1 * 60 + +sec1) * 1000 + +ms1;
+
+    const diffMs = timerCount - lastEl;
+
+    if (isNaN(diffMs)) {
+      return moment(timerCount).format("mm:ss.SS");
+    } else {
+      return moment(diffMs).format("mm:ss.SS");
+    }
+  };
+
+  const handleInterval = async () => {
     setTimerCountVal((timerCountVal) => timerCountVal + 1);
     setLapTimeBool(true);
 
-    setTimerValue([
+    setLapTimeValue([...lapTimeValue, timer()]);
+
+    await setTimerValue([
       ...timerValue,
       {
-        lapTime: timer(),
+        lapTime: getLapTime(timerCount, lapTimeValue),
         circle: timerCountVal,
         totalTime: timer(),
       },
@@ -95,7 +117,6 @@ export default function useTimer() {
     boolVal,
     handleContinue,
     timerValue,
-    timerCountVal,
     val,
     lapTimeBool,
   };

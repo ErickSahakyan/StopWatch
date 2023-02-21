@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export default function useTimer() {
   const [timerCount, setTimerCount] = useState(0);
 
+  const [lapTimerVal, setLapTimerVal] = useState([]);
+
   const [booleanValue, setBooleanValue] = useState(true);
   const [boolean, setBoolean] = useState(true);
 
@@ -29,6 +31,10 @@ export default function useTimer() {
     minutes = minutes < 10 ? "0" + minutes : minutes;
 
     return `${minutes}:${seconds}.${milliseconds}`;
+  }
+
+  function getTimeValue() {
+    console.log(lapTimerVal);
   }
 
   const handleStart = () => {
@@ -63,18 +69,26 @@ export default function useTimer() {
     setTimerCountVal(1);
   };
 
-  const getLapTime = (timerCount, lapTimeValue) => {
+  const getLapTime = (timerCount) => {
     if (lapTimeValue.length === 1) {
       return moment(timerCount).format("mm:ss.SS");
     }
+
     let lastElement = String(lapTimeValue[lapTimeValue.length - 1]);
-    let prevElement = String(lapTimeValue[lapTimeValue.length - 2]);
-    console.log(lastElement, prevElement);
+
     const [min1, sec1, ms1] = lastElement.split(":").concat("0");
 
     const lastEl = (min1 * 60 + +sec1) * 1000 + +ms1;
 
     const diffMs = timerCount - lastEl;
+
+    setLapTimerVal([
+      ...lapTimerVal,
+      {
+        id: Date.now(),
+        diffMs: diffMs,
+      },
+    ]);
 
     if (isNaN(diffMs)) {
       return moment(timerCount).format("mm:ss.SS");
@@ -86,13 +100,14 @@ export default function useTimer() {
   const handleInterval = async () => {
     setTimerCountVal((timerCountVal) => timerCountVal + 1);
     setLapTimeBool(true);
-
     setLapTimeValue([...lapTimeValue, timer()]);
 
+    getTimeValue();
+    
     await setTimerValue([
       ...timerValue,
       {
-        lapTime: getLapTime(timerCount, lapTimeValue),
+        lapTime: getLapTime(timerCount),
         circle: timerCountVal,
         totalTime: timer(),
       },

@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <div className="timer">{timer()}</div>
-      {/* <div className="lapTime">{lapTimeBool ? timer() : ""}</div> */}
+      {/* <div className="lapTime">{lapTimeBool ? lapTime() : ""}</div> */}
 
       <div className="timer__value">
         {val ? (

@@ -16,8 +16,8 @@
 .timer__value{
   color: white;
   font-size: 20px;
-  min-height: 400px;
-  max-height: 400px;
+  min-height: 350px;
+  max-height: 350px;
 
   margin-bottom: 50px;
   display: flex;

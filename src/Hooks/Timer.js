@@ -53,7 +53,7 @@ export default function useTimer() {
     let maxEl = 0;
     let minEl = 0;
 
-    timerValue.map((val, index) => {
+    timerValue.forEach((val, index) => {
       let element = val.lapTime.lapTimeCount;
 
       const [min, sec, ms] = element.split(":").concat("0");

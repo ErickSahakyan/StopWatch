@@ -16,12 +16,15 @@ function App() {
     timerValue,
     val,
     lapTimeBool,
+    maxLapTimer,
+    minLapTimer,
+    lapTimer,
   } = useTimer();
 
   return (
     <div className="App">
       <div className="timer">{timer()}</div>
-      {/* <div className="lapTime">{lapTimeBool ? lapTime() : ""}</div> */}
+      <div className="lapTime">{lapTimeBool ? lapTimer() : ""}</div>
 
       <div className="timer__value">
         {val ? (
@@ -33,12 +36,46 @@ function App() {
         ) : (
           ""
         )}
+
         {timerValue
           ?.map((val, i) => (
             <div key={i} className="timer__info">
-              <p> {val.circle < 10 ? "0" + val.circle : val.circle}</p>
-              <p>{val.lapTime}</p>
-              <p style={{ color: "white" }}>{val.totalTime}</p>
+              <p
+                style={{
+                  color:
+                    maxLapTimer() === val.lapTime.lapTimeCount
+                      ? "red"
+                      : minLapTimer() === val.lapTime.lapTimeCount
+                      ? "rgb(58, 58, 158)"
+                      : "#484848",
+                }}
+              >
+                {val.circle < 10 ? "0" + val.circle : val.circle}
+              </p>
+              <p
+                style={{
+                  color:
+                    maxLapTimer() === val.lapTime.lapTimeCount
+                      ? "red"
+                      : minLapTimer() === val.lapTime.lapTimeCount
+                      ? "rgb(58, 58, 158)"
+                      : "#484848",
+                }}
+              >
+                {val.lapTime.lapTimeCount}
+              </p>
+              <p
+                style={{
+                  color:
+                    maxLapTimer() === val.lapTime.lapTimeCount
+                      ? "red"
+                      : minLapTimer() === val.lapTime.lapTimeCount
+                      ? "rgb(58, 58, 158)"
+                      : "white",
+                }}
+              >
+                {val.totalTime}
+              </p>
             </div>
           ))
           .reverse()}

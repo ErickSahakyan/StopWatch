@@ -81,7 +81,7 @@ function App() {
           .reverse()}
       </div>
 
-      <div>
+      <div className="button__box">
         {booleanValue ? (
           <button className="start" onClick={handleStart}>
             Start

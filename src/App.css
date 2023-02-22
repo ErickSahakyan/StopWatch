@@ -16,8 +16,10 @@
 .timer__value{
   color: white;
   font-size: 20px;
-  height: 55%;
+  min-height: 400px;
+  max-height: 400px;
 
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -112,4 +114,12 @@
   color: #4e4e4e;
   font-size: 14px;
   font-weight: 500;
+}
+
+
+.button__box{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
 }

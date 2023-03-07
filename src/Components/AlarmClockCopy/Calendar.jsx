@@ -2,7 +2,7 @@ import { Button, ButtonBase } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-const Calendar = () => {
+const Calendar = ({ weekday, showCalendar, setShowCalendar }) => {
   const [dateValue, setDateValue] = useState(new Date());
 
   const dayMonth = useRef(new Date());
@@ -47,13 +47,21 @@ const Calendar = () => {
 
   return (
     <div>
-      <div>
-        <Button>
-          <IoIosArrowBack />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button onClick={handlePrevMonth}>
+          <IoIosArrowBack
+            style={{
+              color: "white",
+            }}
+          />
         </Button>
         {new Intl.DateTimeFormat("ru-RU", options).format(dateValue)}
-        <Button>
-          <IoIosArrowForward />
+        <Button onClick={handleNextMonth}>
+          <IoIosArrowForward
+            style={{
+              color: "white",
+            }}
+          />
         </Button>
       </div>
       {/* <div
@@ -77,15 +85,37 @@ const Calendar = () => {
           </span>
         ))}
       </div> */}
-      <div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateRows: "auto auto auto auto auto auto",
+          gridTemplateColumns: "auto auto auto auto auto auto auto",
+        }}
+      >
         {dayInMonth().map((day, i) => (
-          <Button>{day}</Button>
+          <Button
+            
+            style={{
+              color: "white",
+              backgroundColor: "transparent",
+              outline: 0,
+              border: 0,
+              margin: 0,
+            }}
+          >
+            {day}
+          </Button>
         ))}
       </div>
-      <div>
-        <Button>Отмена</Button>
-        <span>|</span>
-        <Button>Готово</Button>
+      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+        <Button
+          onClick={() => setShowCalendar(false)}
+          style={{ color: "white" }}
+        >
+          Отмена
+        </Button>
+        <span style={{ color: "#BCBEC0", marginTop: "10px" }}>|</span>
+        <Button style={{ color: "white" }}>Готово</Button>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Timer } from "./Components/Timer/Timer";
-import AlarmClock from "./Components/AlarmClock/AlarmClock";
+import AlarmClock from "./Components/AlarmClockCopy/AlarmClock";
 import Navbar from "./Components/Navbar/Navbar";
 
 function App() {
